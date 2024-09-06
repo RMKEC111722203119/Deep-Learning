@@ -9,3 +9,4 @@ plotly
 pydeck
 requests
 watchdog
+pythreejs
