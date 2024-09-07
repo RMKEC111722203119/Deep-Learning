@@ -19,7 +19,7 @@ df = df.rename(columns={
     'kepid':'KepID', 'kepoi_name':'KOIName', 'kepler_name':'KeplerName',
     'koi_disposition':'ExoplanetArchiveDisposition', 'koi_pdisposition':'DispositionUsingKeplerData',
     'koi_score':'DispositionScore', 'koi_fpflag_nt':'NotTransit-LikeFalsePositiveFlag',
-    'koi_fpflag_ss':'koi_fpflag_ss', 'koi_fpflag_co':'CentroidOffsetFalsePositiveFlag',import streamlit as st
+    'koi_fpflag_ss':'koi_fpflag_ss', 'koi_fpflag_co':'CentroidOffsetFalsePositiveFlag'}
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
