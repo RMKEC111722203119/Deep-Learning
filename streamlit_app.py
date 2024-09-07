@@ -9,7 +9,7 @@ import time
 
 # Load the dataset from GitHub
 url = "https://github.com/RMKEC111722203119/Deep-Learning/blob/main/exoplanets.csv"
-df = pd.read_csv("../blob/main/exoplanets.csv")
+df = pd.read_csv("exoplanets.csv")
 
 # Data preprocessing
 df['ExoplanetCandidate'] = df['DispositionUsingKeplerData'].apply(lambda x: 1 if x == 'CANDIDATE' else 0)
