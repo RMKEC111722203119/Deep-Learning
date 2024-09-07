@@ -7,7 +7,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
 # Load the dataset from GitHub
-url = "https://raw.githubusercontent.com/your-username/your-repo/main/exoplanets.csv"
+url = "exoplanets.csv"
 df = pd.read_csv(url)
 
 df = df.rename(columns={
@@ -100,5 +100,5 @@ if st.button("Predict"):
     else:
         st.error(f"Number of input features must be {X_train.shape[1]}. You provided {features_input.shape[1]}.")
 
-# Display model accuracy
+
 
