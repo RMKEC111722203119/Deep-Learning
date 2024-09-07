@@ -96,11 +96,61 @@ if st.button("Predict"):
     if features_input.shape[1] == X_train.shape[1]:
         features_scaled = scaler.transform(features_input)
         prediction = model.predict(features_scaled)
-        if prediction[0] == 1:
-            st.write("This exoplanet is likely a candidate for habitability!")
-        else:
-            st.write("This exoplanet is likely not a candidate for habitability.")
-    
+       # Grand and exciting prediction display
+if prediction[0] == 1:
+    st.markdown(
+        """
+        <div style='background-color:#28a745;padding:25px;border-radius:15px;box-shadow: 0px 0px 30px #28FFBF;'>
+            <h1 style='text-align:center;color:#fff;font-size:40px;font-family:Verdana, sans-serif;'>🚀🌟 Hooray! A New World Awaits! 🌍🪐</h1>
+            <p style='text-align:center;color:#fff;font-size:22px;animation: glow 1s infinite alternate;'>
+                This exoplanet is <strong>likely a candidate for habitability!</strong><br>
+                The stars have aligned, and you're on the brink of an extraordinary discovery! ✨
+            </p>
+            <p style='text-align:center;color:#fff;font-size:18px;'>
+                🌌 Ready your spacesuit for the journey ahead! 🚀
+            </p>
+        </div>
+        
+        <style>
+            @keyframes glow {
+                from { text-shadow: 0 0 10px #28FFBF, 0 0 20px #28FFBF, 0 0 30px #28FFBF; }
+                to { text-shadow: 0 0 20px #28FFBF, 0 0 30px #28FFBF, 0 0 40px #28FFBF; }
+            }
+        </style>
+        """, unsafe_allow_html=True
+    )
+else:
+    st.markdown(
+        """
+        <div style='background-color:#FF6347;padding:25px;border-radius:15px;box-shadow: 0px 0px 30px #FF6347;'>
+            <h1 style='text-align:center;color:#fff;font-size:40px;font-family:Verdana, sans-serif;'>💔 Alas! Not This Time! 🪐</h1>
+            <p style='text-align:center;color:#fff;font-size:22px;animation: shake 1s ease-in-out infinite;'>
+                This exoplanet is <strong>not a candidate for habitability.</strong><br>
+                But don't lose hope! The universe is vast and full of possibilities! 🌌
+            </p>
+            <p style='text-align:center;color:#fff;font-size:18px;'>
+                🔭 Keep searching, the next habitable planet may be just around the corner! 🌍
+            </p>
+        </div>
+        
+        <style>
+            @keyframes shake {
+                0% { transform: translate(1px, 1px) rotate(0deg); }
+                10% { transform: translate(-1px, -2px) rotate(-1deg); }
+                20% { transform: translate(-3px, 0px) rotate(1deg); }
+                30% { transform: translate(3px, 2px) rotate(0deg); }
+                40% { transform: translate(1px, -1px) rotate(1deg); }
+                50% { transform: translate(-1px, 2px) rotate(-1deg); }
+                60% { transform: translate(-3px, 1px) rotate(0deg); }
+                70% { transform: translate(3px, 1px) rotate(-1deg); }
+                80% { transform: translate(-1px, -1px) rotate(1deg); }
+                90% { transform: translate(1px, 2px) rotate(0deg); }
+                100% { transform: translate(1px, -2px) rotate(-1deg); }
+            }
+        </style>
+        """, unsafe_allow_html=True
+    )
+
 st.header("Model Performance Metrics")
 st.write(f"**Accuracy**: {accuracy:.2f}")
 st.write(f"**Precision**: {precision:.2f}")
