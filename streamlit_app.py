@@ -4,9 +4,10 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
 
 # Load the dataset from GitHub
-url = "exoplanets.csv"
+url = "https://raw.githubusercontent.com/your-username/your-repo/main/exoplanets.csv"
 df = pd.read_csv(url)
 
 df = df.rename(columns={
@@ -47,10 +48,17 @@ df.drop(columns=['KeplerName', 'KOIName', 'EquilibriumTemperatureUpperUnc.[K', '
                  'EphemerisMatchIndicatesContaminationFalsePositiveFlag', 'TCEDeliver', 
                  'EquilibriumTemperatureLowerUnc.[K'], inplace=True)
 
+# Selecting 10 relevant features
+selected_features = ['OrbitalPeriod[days', 'TransitDepth[ppm', 'PlanetaryRadius[Earthradii', 
+                      'EquilibriumTemperature[K', 'StellarRadius[Solarradii', 'RA[decimaldegrees', 
+                      'Dec[decimaldegrees', 'TransitSignal-to-Nois', 'StellarEffectiveTemperature[K', 
+                      'StellarSurfaceGravity[log10(cm/s**2)']
+df = df[selected_features + ['ExoplanetCandidate']]
+
 df.dropna(inplace=True)
 
 # Feature and target selection
-features = df.drop(columns=['ExoplanetCandidate', 'ExoplanetConfirmed'])
+features = df.drop(columns=['ExoplanetCandidate'])
 target = df.ExoplanetCandidate
 
 # Split dataset
@@ -61,24 +69,25 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-# Build a RandomForestClassifier model
+# Build and evaluate the RandomForestClassifier model
 model = RandomForestClassifier(n_estimators=100)
 model.fit(X_train_scaled, y_train)
+
+# Predictions and accuracy
+y_pred = model.predict(X_test_scaled)
+accuracy = accuracy_score(y_test, y_pred)
 
 # Streamlit interface
 st.title("Exoplanet Predictor")
 
-# Sidebar input for features
-st.sidebar.header("Input Features")
-# Ensure the number of input features matches the trained model
-input_features = list(features.columns)
-user_inputs = {}
-for feature in input_features:
-    user_inputs[feature] = st.sidebar.number_input(feature, min_value=0.0)
+# Main input area for features
+st.header("Input Features")
+input_features = {feature: st.number_input(feature, min_value=0.0) for feature in features.columns}
 
 # Predict button
-if st.sidebar.button("Predict"):
-    features_input = np.array([list(user_inputs.values())])
+st.write(f"Model Accuracy: {accuracy:.2f}")
+if st.button("Predict"):
+    features_input = np.array([list(input_features.values())])
     
     # Check if the input feature length matches the expected number of features
     if features_input.shape[1] == X_train.shape[1]:
@@ -90,3 +99,6 @@ if st.sidebar.button("Predict"):
             st.write("This exoplanet is likely not a candidate.")
     else:
         st.error(f"Number of input features must be {X_train.shape[1]}. You provided {features_input.shape[1]}.")
+
+# Display model accuracy
+
