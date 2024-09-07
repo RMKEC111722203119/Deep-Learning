@@ -101,13 +101,13 @@ if st.button("Predict"):
         else:
             st.write("This exoplanet is likely not a candidate for habitability.")
     
-    st.header("Model Performance Metrics")
-    st.write(f"**Accuracy**: {accuracy:.2f}")
-    st.write(f"**Precision**: {precision:.2f}")
-    st.write(f"**Recall**: {recall:.2f}")
-    st.write(f"**F1 Score**: {f1:.2f}")
-    st.write("**Confusion Matrix**:")
-    st.write(conf_matrix)
+st.header("Model Performance Metrics")
+st.write(f"**Accuracy**: {accuracy:.2f}")
+st.write(f"**Precision**: {precision:.2f}")
+st.write(f"**Recall**: {recall:.2f}")
+st.write(f"**F1 Score**: {f1:.2f}")
+st.write("**Confusion Matrix**:")
+st.write(conf_matrix)
 
     
 # Explanations for input features
