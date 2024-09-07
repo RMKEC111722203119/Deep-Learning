@@ -11,7 +11,7 @@ import plotly.graph_objects as go
 import time
 
 # Load the dataset from GitHub
-url = "https://raw.githubusercontent.com/your-username/your-repo/main/exoplanets.csv"
+url = "https://github.com/RMKEC111722203119/Deep-Learning/blob/main/exoplanets.csv"
 df = pd.read_csv(url)
 
 # Data preprocessing (same as before)
